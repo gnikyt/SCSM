@@ -16,6 +16,8 @@ See `dist/scsm(.min).js`
 
 ## Usage
 
+Add a script to your `layouts/checkout.liquid` file.
+
 ### TypeScript (Node)
 
 ```javascript
@@ -98,7 +100,10 @@ JobManager.execute(Event.PageLoad);
 ### Javascript (Browser)
 
 ```html
-<script src="scsm.min.js"></script>
+<!-- layouts/checkout.liquid -->
+<!-- save scsm.min.js to assets/ -->
+{{ 'scsm.min.js' | asset_url | script_url }}
+
 <script>
   function Hello(type) {
     // Fire only on payment method page and shipping method page
