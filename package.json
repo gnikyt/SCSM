@@ -11,10 +11,7 @@
   "files": [
     "lib/**/*"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/ohmybrew/scsm.git"
-  },
+  "repository": "ohmybrew/scsm.git",
   "license": "MIT",
   "types": "lib/*.d.ts",
   "scripts": {
