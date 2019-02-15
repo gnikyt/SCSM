@@ -107,15 +107,27 @@ JobManager.execute(Event.PageLoad);
 <script>
   function Hello(type) {
     // Fire only on payment method page and shipping method page
-    this.steps = [Step.PaymentMethod, Step.ShippingMethod];
+    this.steps = [SCSM.Step.PaymentMethod, SCSM.Step.ShippingMethod];
 
     // Fire only for DOMContentLoaded
-    this.events = [Event.DomLoad];
+    this.events = [SCSM.Event.DomLoad];
   }
   
   Apple.prototype.run = function() {
     alert('Hello!');
   };
+
+  // Add the job
+  SCSM.JobManager.add(new Hello());
+
+  // Fire all jobs tired to DOMContentLoaded
+  SCSM.JobManager.execute(Event.DomLoaded);
+
+  // Fire all jobs tired to page:change
+  SCSM.JobManager.execute(Event.PageChange);
+
+  // Fire all jobs tired to page:load
+  SCSM.JobManager.execute(Event.PageLoad);
 </script>
 ```
 
