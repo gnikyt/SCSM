@@ -1,5 +1,7 @@
 # Shopify Checkout Scripts Manager
 
+*Work in progress*
+
 Helper manager to process Javascript-based changes to Shopify Plus checkout.
 
 Written in TypeScript with exports to plain Javascript and Browser (through Browserify).
@@ -24,11 +26,7 @@ Add a script to your `layouts/checkout.liquid` file.
 # TS version...
 # checkout.ts
 
-import { JobManager } from 'scsm/Jobmanager';
-import { BaseJob } from 'scsm/BaseJob';
-import { IJob } from 'scsm/interfaces/IJob';
-import { Step } from 'scsm/types/step';
-import { Event } from 'scsm/types/event';
+import { JobManager, BaseJob, IJob, Step, Event } from 'scsm';
 
 // Example basic hello class
 class Hello extends BaseJob implements IJob {
@@ -36,7 +34,7 @@ class Hello extends BaseJob implements IJob {
   public steps = [Step.PaymentMethod, Step.ShippingMethod];
 
   // Fire only for DOMContentLoaded
-  public events = [Event.DomLoad];
+  public events = [Event.DomLoaded];
 
   // Run your code...
   run(): void {
@@ -63,19 +61,18 @@ JobManager.execute(Event.PageLoad);
 # JS version...
 # checkout.js
 
-const JobManager = require('scsm/lib/jobManager');
-const BaseJob = require('scsm/lib/baseJob');
-const Step = require('scsm/lib/types/step');
-const Event = require('scsm/lib/types/event');
+const { JobManager, BaseJob, Step, Event } = require('scsm');
 
 // Example basic hello class
 class Hello extends BaseJob {
   constructor() {
+    super();
+
     // Fire only on payment method page and shipping method page
     this.steps = [Step.PaymentMethod, Step.ShippingMethod];
 
     // Fire only for DOMContentLoaded
-    this.events = [Event.DomLoad];
+    this.events = [Event.DomLoaded];
   }
 
   // Run your code...
@@ -105,6 +102,8 @@ JobManager.execute(Event.PageLoad);
 {{ 'scsm.min.js' | asset_url | script_url }}
 
 <script>
+  // SCSM is mapped to window.SCSM
+
   function Hello(type) {
     // Fire only on payment method page and shipping method page
     this.steps = [SCSM.Step.PaymentMethod, SCSM.Step.ShippingMethod];

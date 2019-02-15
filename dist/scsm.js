@@ -1,55 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var jobManager_1 = require("./jobManager");
-/**
- * Base abstract job class.
- */
-var BaseJob = /** @class */ (function () {
-    function BaseJob() {
-    }
-    /**
-     * Checks if the step is active.
-     * @param step The step to check.
-     */
-    BaseJob.prototype.isStep = function (step) {
-        if (step.constructor === Array) {
-            return step.indexOf(jobManager_1.JobManager.currentStep) > -1;
-        }
-        return jobManager_1.JobManager.currentStep === step;
-    };
-    return BaseJob;
-}());
-exports.BaseJob = BaseJob;
-
-},{"./jobManager":3}],2:[function(require,module,exports){
 (function (global){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var jobManager_1 = require("./jobManager");
-var baseJob_1 = require("./baseJob");
-var event_1 = require("./types/event");
-var step_1 = require("./types/step");
-// Export to global space (for browser)
-global.SCSM = {
-    JobManager: jobManager_1.JobManager,
-    BaseJob: baseJob_1.BaseJob,
-    Event: event_1.Event,
-    Step: step_1.Step,
-};
-// Node exports
-module.exports = {
-    JobManager: jobManager_1.JobManager,
-    BaseJob: baseJob_1.BaseJob,
-    Event: event_1.Event,
-    Step: step_1.Step,
-};
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./baseJob":1,"./jobManager":3,"./types/event":4,"./types/step":5}],3:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var step_1 = require("./types/step");
 /**
  * Uppercase the first letter.
  * @param input The input string.
@@ -69,6 +21,44 @@ var snakeToPascal = function (input) {
     }).join('');
 };
 /**
+ * Types of events the jobs can attach to.
+ */
+var Event;
+(function (Event) {
+    Event["Load"] = "page:load";
+    Event["Change"] = "page:change";
+    Event["DomLoad"] = "DOMContentLoaded";
+})(Event = exports.Event || (exports.Event = {}));
+/**
+ * Steps the jobs can listen for.
+ */
+var Step;
+(function (Step) {
+    Step["CustomerInformation"] = "customer_information";
+    Step["ShippingMethod"] = "shipping_method";
+    Step["PaymentMethod"] = "payment_method";
+    Step["ThankYou"] = "thank_you";
+})(Step = exports.Step || (exports.Step = {}));
+/**
+ * Base abstract job class.
+ */
+var BaseJob = /** @class */ (function () {
+    function BaseJob() {
+    }
+    /**
+     * Checks if the step is active.
+     * @param step The step to check.
+     */
+    BaseJob.prototype.isStep = function (step) {
+        if (step.constructor === Array) {
+            return step.indexOf(JobManager.currentStep) > -1;
+        }
+        return JobManager.currentStep === step;
+    };
+    return BaseJob;
+}());
+exports.BaseJob = BaseJob;
+/**
  * Job manager for checkout.
  */
 var JobManager = /** @class */ (function () {
@@ -87,7 +77,7 @@ var JobManager = /** @class */ (function () {
                 step = 'thank_you';
             }
             var convertedStep = snakeToPascal(step);
-            return step_1.Step[convertedStep];
+            return Step[convertedStep];
         },
         enumerable: true,
         configurable: true
@@ -154,32 +144,13 @@ var JobManager = /** @class */ (function () {
     return JobManager;
 }());
 exports.JobManager = JobManager;
+// Export to global space (for browser)
+global.SCSM = {
+    JobManager: JobManager,
+    BaseJob: BaseJob,
+    Step: Step,
+    Event: Event
+};
 
-},{"./types/step":5}],4:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Types of events the jobs can attach to.
- */
-var Event;
-(function (Event) {
-    Event["Load"] = "page:load";
-    Event["Change"] = "page:change";
-    Event["DomLoad"] = "DOMContentLoaded";
-})(Event = exports.Event || (exports.Event = {}));
-
-},{}],5:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Steps the jobs can listen for.
- */
-var Step;
-(function (Step) {
-    Step["CustomerInformation"] = "customer_information";
-    Step["ShippingMethod"] = "shipping_method";
-    Step["PaymentMethod"] = "payment_method";
-    Step["ThankYou"] = "thank_you";
-})(Step = exports.Step || (exports.Step = {}));
-
-},{}]},{},[2]);
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}]},{},[1]);

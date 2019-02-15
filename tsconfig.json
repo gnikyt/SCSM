@@ -2,12 +2,13 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "moduleResolution": "node",
     "sourceMap": false,
     "declaration": true,
     "outDir": "./lib",
     "strict": true,
     "lib": ["es2016", "dom"]
   },
-  "include": ["src"],
+  "include": ["src/index.ts"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }
