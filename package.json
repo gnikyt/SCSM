@@ -7,13 +7,16 @@
   ],
   "version": "1.0.0",
   "description": "Helper \"job\" manager for Shopify Plus checkouts",
-  "main": "lib/index.js",
-  "files": [
-    "lib/**/*"
-  ],
+  "main": "lib/index",
   "repository": "ohmybrew/scsm",
   "license": "MIT",
-  "types": "lib/*.d.ts",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib/index.js",
+    "lib/index.d.ts",
+    "dist/scsm.js",
+    "dist/scsm.min.js"
+  ],
   "scripts": {
     "test": "jest --config jestconfig.json",
     "test-coverage": "jest --coverage --config jestconfig.json",
