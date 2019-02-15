@@ -63,10 +63,10 @@ JobManager.execute(Event.PageLoad);
 # JS version...
 # checkout.js
 
-import { JobManager } from 'scsm/Jobmanager';
-import { BaseJob } from 'scsm/BaseJob';
-import { Step } from 'scsm/types/step';
-import { Event } from 'scsm/types/event';
+const JobManager = require('scsm/lib/jobManager');
+const BaseJob = require('scsm/lib/baseJob');
+const Step = require('scsm/lib/types/step');
+const Event = require('scsm/lib/types/event');
 
 // Example basic hello class
 class Hello extends BaseJob {

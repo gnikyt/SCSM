@@ -7,7 +7,7 @@
   ],
   "version": "1.0.0",
   "description": "Helper \"job\" manager for Shopify Plus checkouts",
-  "main": "lib",
+  "main": "lib/index.js",
   "files": [
     "lib/**/*"
   ],
@@ -18,7 +18,7 @@
     "test": "jest --config jestconfig.json",
     "test-coverage": "jest --coverage --config jestconfig.json",
     "build": "tsc",
-    "build-browser": "browserify ./src/standalone.ts -o dist/scsm.js -t [ babelify --presets [ @babel/preset-env ] ] -p [ tsify ]",
+    "build-browser": "browserify ./src/index.ts -o dist/scsm.js -t [ babelify --presets [ @babel/preset-env ] ] -p [ tsify ]",
     "build-browser-package": "npm run build-browser && uglifyjs --compress --mangle -o dist/scsm.min.js -- dist/scsm.js",
     "prepare": "npm run build-browser-package"
   },

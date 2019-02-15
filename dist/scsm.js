@@ -22,7 +22,31 @@ var BaseJob = /** @class */ (function () {
 }());
 exports.BaseJob = BaseJob;
 
-},{"./jobManager":2}],2:[function(require,module,exports){
+},{"./jobManager":3}],2:[function(require,module,exports){
+(function (global){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var jobManager_1 = require("./jobManager");
+var baseJob_1 = require("./baseJob");
+var event_1 = require("./types/event");
+var step_1 = require("./types/step");
+// Export to global space (for browser)
+global.SCSM = {
+    JobManager: jobManager_1.JobManager,
+    BaseJob: baseJob_1.BaseJob,
+    Event: event_1.Event,
+    Step: step_1.Step,
+};
+// Node exports
+module.exports = {
+    JobManager: jobManager_1.JobManager,
+    BaseJob: baseJob_1.BaseJob,
+    Event: event_1.Event,
+    Step: step_1.Step,
+};
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./baseJob":1,"./jobManager":3,"./types/event":4,"./types/step":5}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var step_1 = require("./types/step");
@@ -131,24 +155,7 @@ var JobManager = /** @class */ (function () {
 }());
 exports.JobManager = JobManager;
 
-},{"./types/step":5}],3:[function(require,module,exports){
-(function (global){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var jobManager_1 = require("./jobManager");
-var baseJob_1 = require("./baseJob");
-var event_1 = require("./types/event");
-var step_1 = require("./types/step");
-// Export to global space (for browser)
-global.SCSM = {
-    JobManager: jobManager_1.JobManager,
-    BaseJob: baseJob_1.BaseJob,
-    Event: event_1.Event,
-    Step: step_1.Step,
-};
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./baseJob":1,"./jobManager":2,"./types/event":4,"./types/step":5}],4:[function(require,module,exports){
+},{"./types/step":5}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
@@ -175,4 +182,4 @@ var Step;
     Step["ThankYou"] = "thank_you";
 })(Step = exports.Step || (exports.Step = {}));
 
-},{}]},{},[3]);
+},{}]},{},[2]);

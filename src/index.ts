@@ -10,3 +10,11 @@ import { Step } from './types/step';
   Event,
   Step,
 };
+
+// Node exports
+module.exports = {
+  JobManager,
+  BaseJob,
+  Event,
+  Step,
+};
