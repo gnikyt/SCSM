@@ -1,7 +1,5 @@
 # Shopify Checkout Scripts Manager
 
-*Work in progress*
-
 Helper manager to process Javascript-based changes to Shopify Plus checkout.
 
 Written in TypeScript with exports to plain Javascript and Browser (through Browserify).

@@ -1,8 +1,4 @@
-import { JobManager } from '../jobManager';
-import { IJob } from '../interfaces/IJob';
-import { BaseJob } from '../baseJob';
-import { Step } from '../types/step';
-import { Event } from '../types/event';
+import { JobManager, IJob, BaseJob, Step, Event } from '../';
 
 class TestJob extends BaseJob implements IJob {
   public steps = [Step.PaymentMethod, Step.ShippingMethod];

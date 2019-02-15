@@ -1,5 +1,4 @@
-import { BaseJob } from '../baseJob';
-import { Step } from '../types/step';
+import { BaseJob, Step } from '../';
 
 class TestJob3 extends BaseJob { }
 
