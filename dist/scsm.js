@@ -143,7 +143,7 @@ var JobManager = /** @class */ (function () {
     return JobManager;
 }());
 exports.JobManager = JobManager;
-// Export to global space (for browser)
+// Exports
 exports.default = {
     JobManager: JobManager,
     BaseJob: BaseJob,

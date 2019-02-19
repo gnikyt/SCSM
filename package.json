@@ -5,7 +5,7 @@
     "shopify",
     "checkout"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Helper \"job\" manager for Shopify Plus checkouts",
   "main": "lib/index",
   "repository": "ohmybrew/scsm",
