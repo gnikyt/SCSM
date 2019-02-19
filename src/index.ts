@@ -162,8 +162,8 @@ export class JobManager {
   }
 }
 
-// Export to global space (for browser)
-(global as any).SCSM = {
+// Exports
+export default {
   JobManager,
   BaseJob,
   Step,

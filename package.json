@@ -21,9 +21,8 @@
     "test": "jest --config jestconfig.json",
     "test-coverage": "jest --coverage --config jestconfig.json",
     "build": "tsc",
-    "build-browser": "browserify ./src/index.ts -o dist/scsm.js -t [ babelify --presets [ @babel/preset-env ] ] -p [ tsify ]",
-    "build-browser-package": "npm run build-browser && uglifyjs --compress --mangle -o dist/scsm.min.js -- dist/scsm.js",
-    "prepare": "npm run build-browser-package"
+    "build:browser": "browserify ./src/index.ts -o dist/scsm.js -t [ babelify --presets [ @babel/preset-env ] ] -p [ tsify ] --standalone SCSM && uglifyjs --compress --mangle -o dist/scsm.min.js -- dist/scsm.js",
+    "prepare": "npm run build && npm run build:browser"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
