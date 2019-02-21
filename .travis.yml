@@ -8,7 +8,7 @@ node_js:
 
 after_script:
   - npm run test-coverage
-  - cat ./coverage/lcov.info | coveralls
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
 webhooks:
   urls: https://webhooks.gitter.im/e/237280ed4796c19cc626
