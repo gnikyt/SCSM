@@ -31,6 +31,7 @@
     "@types/node": "^11.9.4",
     "babelify": "^10.0.0",
     "browserify": "^16.2.3",
+    "coveralls": "^3.0.2",
     "jest": "^23.6.0",
     "sinon": "^7.2.3",
     "ts-jest": "^23.10.5",

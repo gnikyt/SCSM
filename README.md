@@ -1,6 +1,9 @@
 # Shopify Checkout Scripts Manager
 
-Helper manager to process Javascript-based changes to Shopify Plus checkout.
+[![Build status](https://img.shields.io/travis/ohmybrew/scsm/master.svg)](https://travis-ci.org/ohmybrew/scsm)
+[![Coverage](https://img.shields.io/coveralls/ohmybrew/scsm.svg)](https://coveralls.io/r/ohmybrew/scsm)
+
+A sipme helper manager to process Javascript-based changes to Shopify Plus checkout.
 
 Written in TypeScript with exports to plain Javascript and Browser (through Browserify).
 
@@ -36,6 +39,8 @@ class Hello extends BaseJob implements IJob {
 
   // Run your code...
   run(): void {
+    // Since subsribing to multiple steps, you can use
+    // `this.isStep(Step.[Step Here])` to confirm the current step
     alert('Hello!');
   }
 }
@@ -75,6 +80,9 @@ class Hello extends BaseJob {
 
   // Run your code...
   run() {
+    // Since subsribing to multiple steps, you can use
+    // `this.isStep(Step.[Step Here])` to confirm the current step
+    // It also accepts an array of steps
     alert('Hello!');
   }
 }
@@ -109,8 +117,23 @@ JobManager.execute(Event.PageLoad);
     // Fire only for DOMContentLoaded
     this.events = [SCSM.Event.DomLoad];
   }
+
+  /**
+   * Checks if the step is active.
+   * @param step The step to check.
+   */
+  Hello.prototype.isStep(step) {
+    if (step.constructor === Array) {
+      return step.indexOf(SCSM.JobManager.currentStep) > -1;
+    }
+
+    return SCSM.JobManager.currentStep === step;
+  }
   
-  Apple.prototype.run = function() {
+  Hello.prototype.run = function() {
+    // Since subsribing to multiple steps, you can use
+    // `this.isStep(Step.[Step Here])` to confirm the current step
+    // It also accepts an array of steps
     alert('Hello!');
   };
 
