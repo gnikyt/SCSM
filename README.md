@@ -1,6 +1,6 @@
 # Shopify Checkout Scripts Manager
 
-[![Build status](https://img.shields.io/travis/ohmybrew/scsm/master.svg)](https://travis-ci.org/ohmybrew/scsm)
+[![Build status](https://img.shields.io/travis/ohmybrew/SCSM/master.svg)](https://travis-ci.org/ohmybrew/SCSM)
 [![Coverage Status](https://coveralls.io/repos/github/ohmybrew/SCSM/badge.svg?branch=master)](https://coveralls.io/github/ohmybrew/SCSM?branch=master)
 
 A sipme helper manager to process Javascript-based changes to Shopify Plus checkout.
