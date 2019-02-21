@@ -132,7 +132,9 @@ export class JobManager {
    */
   static remove(job: IJob): boolean {
     // Find the matching job
-    const index = JobManager.jobs.findIndex(existingJob => typeof job === (typeof existingJob));
+    const index = JobManager.jobs.findIndex((existingJob) => {
+      return job.constructor.name === existingJob.constructor.name;
+    });
     if (index === -1) {
       // No matches
       return false;

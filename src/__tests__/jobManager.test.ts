@@ -14,6 +14,10 @@ class TestJob2 extends BaseJob implements IJob {
   run(): void { }
 }
 
+const setStep = (step: string) => {
+  (window as any).Shopify = { Checkout: { step } };
+};
+
 beforeEach(() => {
   // Clear current step
   (window as any).Shopify = { Checkout: { } };
@@ -43,6 +47,19 @@ describe('JobManager', () => {
     expect((JobManager.list[0] as any).constructor.name).toBe('TestJob2');
   });
 
+  test('Does not remove jobs', () => {
+    const job = new TestJob();
+    const job2 = new TestJob2();
+
+    JobManager.add(job);
+    expect(JobManager.list.length).toBe(1);
+
+    JobManager.remove(job2);
+    expect(JobManager.list.length).toBe(1);
+
+    expect((JobManager.list[0] as any).constructor.name).toBe('TestJob');
+  });
+
   test('Lists jobs', () => {
     expect(JobManager.list.length).toBe(0);
   });
@@ -55,7 +72,7 @@ describe('JobManager', () => {
   });
 
   test('Runs jobs', () => {
-    (window as any).Shopify = { Checkout: { step: 'payment_method' } };
+    setStep('payment_method');
 
     const job = new TestJob();
     const spy = jest.spyOn(job, 'run');
@@ -67,7 +84,7 @@ describe('JobManager', () => {
   });
 
   test('Doesnt run jobs not matching step', () => {
-    (window as any).Shopify = { Checkout: { step: 'thank_you' } };
+    setStep('thank_you');
 
     const job = new TestJob();
     const spy = jest.spyOn(job, 'run');
@@ -79,7 +96,7 @@ describe('JobManager', () => {
   });
 
   test('Doesnt run jobs not matching event', () => {
-    (window as any).Shopify = { Checkout: { step: 'payment_method' } };
+    setStep('payment_method');
 
     const job = new TestJob();
     const spy = jest.spyOn(job, 'run');
@@ -88,5 +105,13 @@ describe('JobManager', () => {
     JobManager.execute(Event.Change);
 
     expect(job.run).toBeCalledTimes(0);
+  });
+
+  test('Fallback for current step', () => {
+    (window as any).Shopify = undefined;
+    expect(JobManager.currentStep).toBe('thank_you');
+
+    (window as any).Shopify = { Checkout: { } };
+    expect(JobManager.currentStep).toBe('thank_you');
   });
 });
